@@ -118,13 +118,16 @@ class Rectangle(Body):
 @dataclass
 class Ship(Body):
     dimensions = 16, 80
+    width: float = 16
+    length: float = 80
     scale: float = 80.0
     lon_scale: float = 10.0
     lat_scale: float = 10.0
 
     def _body_polygon(self) -> geo.Polygon:
         x, y = self.x, self.y
-        w, h = (d * self.scale for d in self.dimensions)
+        # w, h = (d * self.scale for d in self.dimensions)
+        w, h = self.width, self.length
         x_min, x_max = x - w / 2, x + w / 2
         y_min, y_max = y - h / 2, y + h / 2 - w
         left_aft, right_aft = (x_min, y_min), (x_max, y_min)

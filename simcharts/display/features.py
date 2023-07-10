@@ -340,10 +340,8 @@ class FeaturesManager:
         ship_id = vessel.id
         pose = [vessel.x, vessel.y, 0]
         if (vessel.heading == None):
-            # pose[2] = ssa(vessel.cog)
             pose[2] = vessel.cog
         else:
-            # pose[2] = ssa(vessel.heading)
             pose[2] = vessel.heading
         if not self.vessel_changed(ship_id, pose):
             return
@@ -352,9 +350,11 @@ class FeaturesManager:
         else:
             color = get_random_color()
         kwargs = dict(
-            scale=vessel.scale,
-            lon_scale=2.0, # MAGIC NUMBER: Why is this 2.0?
-            lat_scale=1.0, # MAGIC NUMBER: Why is this 1.0?
+            width = vessel.width,
+            length = vessel.length,
+            scale = vessel.scale,
+            lon_scale = 2.0, # MAGIC NUMBER: Why is this 2.0?
+            lat_scale = 1.0, # MAGIC NUMBER: Why is this 1.0?
         )
         ship = spl.Ship(*pose, **kwargs)
         artist = self.new_artist(ship.geometry, color)
