@@ -15,7 +15,7 @@ enc:
   border: False                                                           # bool for showing a border around the environment plot
   verbose: True                                                           # bool for status printing during geometry processing
   #origin_lla: [62.457464, 6.146678]                                       # origin in latitude longitude (degrees) for transformation purposes (NOT IMPLEMENTED YET)
-  sim_callback_time: 5
+  sim_callback_time: 3
   local_traffic_publish_timer: 0.01
 
 display:

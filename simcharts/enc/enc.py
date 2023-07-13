@@ -43,6 +43,8 @@ class ENC(Node):
     def __init__(self, config, executor=None, cli_args=None, multiprocessing=False, **kwargs):
         super().__init__('simcharts__node', cli_args=cli_args)
         matplotlib.use("TkAgg")
+
+        self._CLK = 0 # Simulation time
         
         self.local_traffic = {}
         self.local_traffic_queue = {}
@@ -136,12 +138,12 @@ class ENC(Node):
         self._display.update_plot()
         while True:
             rclpy.spin_once(self, executor=self.executor, timeout_sec=0.01)
-
             self.draw_paths()
             self.update_trajectories()
             self.update_polygons()
             self._display.update_plot()
             delta_t = t_i_plus_1 - t_i
+            self.get_logger().debug(f"Sim delta t: {delta_t}")
             if delta_t >= self.sim_callback_time:
                 # rclpy.spin_once(self, executor=self.executor, timeout_sec=0.01)
                 self.update_local_traffic()
